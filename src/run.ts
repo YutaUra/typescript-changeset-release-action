@@ -15,6 +15,8 @@ export const run = async (inputs: Inputs) => {
   const { version } = JSON.parse(await readFile("./package.json", "utf8"));
 
   // check v{version} tag exists
+  // fetch specific tag
+  await exec("git", ["fetch", "--tags"]);
   const { stdout: tagExists } = await getExecOutput("git", [
     "tag",
     "-l",
