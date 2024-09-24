@@ -3,7 +3,7 @@ import { run } from "./run.js";
 
 const main = async (): Promise<void> => {
   await run({
-    name: core.getInput("name", { required: true }),
+    setupGitUser: core.getBooleanInput("setupGitUser"),
   });
 };
 
