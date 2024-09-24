@@ -7,7 +7,7 @@ const main = async () => {
   await exec("sed", ["-i", "-E", "s|^/?dist/?||g", ".gitignore"]);
   // remove unnecessary files
   await exec("rm", "-rf", ".github/workflows");
-  await exec("git", ["status"])
+  await exec("git", ["status"]);
 
   const { version } = JSON.parse(await readFile("./package.json", "utf8"));
 
