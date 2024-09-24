@@ -1,71 +1,46 @@
-# typescript-action [![ts](https://github.com/yutaura/typescript-action/actions/workflows/ts.yaml/badge.svg)](https://github.com/yutaura/typescript-action/actions/workflows/ts.yaml)
+# typescript-changeset-release-action [![ts](https://github.com/yutaura/typescript-changeset-release-action/workflows/ts.yaml/badge.svg)](https://github.com/yutaura/typescript-changeset-release-action/actions/workflows/ts.yaml)
 
-This is a template of TypeScript action.
-Inspired from https://github.com/actions/typescript-action and https://github.com/int128/typescript-action.
-
-## Features
-
-- Ready to develop with the minimum configs
-  - biome
-  - tsconfig
-  - vitest
-  - changeset
-- Automated continuous release
-- Keep consistency of generated files
-- Shipped with Renovate config
-
-## Getting Started
-
-Click `Use this template` to create a repository.
-
-Then checkout your repository and test it. Node.js is required.
-
-```console
-$ git clone https://github.com/your/repo.git
-
-$ pnpm i
-$ pnpm test
-```
-
-Create a pull request for a change.
-
-you can use `changeset` to manage the version.
-
-```console
-$ git checkout -b feature
-$ pnpm changeset add
-$ git commit -m 'Add feature'
-$ gh pr create -fd
-```
-
-Once you merge a pull request, pr to create a release will be created automatically.
-you can merge release pr, then a new release will be created.
+This action is a github action release manager using changeset.
 
 ## Specification
 
 To run this action, create a workflow as follows:
 
 ```yaml
+# .github/workflows/release.yaml
+name: release
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  build:
+  tag:
     runs-on: ubuntu-latest
     steps:
-      - uses: int128/typescript-action@v1
-        with:
-          name: hello
+      - uses: actions/checkout@v4.1.7
+
+      # build your github action
+      # - run: pnpm build
+
+      - uses: YutaUra/typescript-changeset-release-action
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### Inputs
 
-| Name   | Default    | Description   |
-| ------ | ---------- | ------------- |
-| `name` | (required) | example input |
+| Name                   | Default           | Description                                                                          |
+| ---------------------- | ----------------- | ------------------------------------------------------------------------------------ |
+| `commit`               | `Version Action`  | The commit message                                                                   |
+| `title`                | `Release Action`  | The title of PR                                                                      |
+| `setupGitUser`         | `true`            | Set up git user(`github-actions[bot]<github-actions[bot]@users.noreply.github.com>`) |
+| `createGithubReleases` | `true`            | Create a release on GitHub                                                           |
+| `branch`               | `github.ref_name` | The branch name to create a release                                                  |
 
 ### Outputs
-
-| Name      | Description    |
-| --------- | -------------- |
-| `example` | example output |
 
 ## Development
 
