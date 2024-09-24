@@ -1,5 +1,11 @@
 # typescript-changeset-release-action
 
+## 0.0.3
+
+### Patch Changes
+
+- 34b221e: fix doc
+
 ## 0.0.2
 
 ### Patch Changes
