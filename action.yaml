@@ -55,7 +55,7 @@ runs:
         commit: ${{ inputs.commit-message && inputs.commit-message || inputs.commit && inputs.commit || 'Version Action' }}
         title: ${{ inputs.pr-title && inputs.pr-title || inputs.title && inputs.title || 'Release Action' }}
         setupGitUser: ${{ inputs.setup-git-user && inputs.setup-git-user || inputs.setupGitUser && inputs.setupGitUser || 'true' }}
-        createGithubReleases: ${{ inputs.create-github-releases && inputs.create-github-releases || inputs.createGithubReleases && inputs.createGithubReleases || 'false' }}
+        createGithubReleases: ${{ inputs.create-github-releases && inputs.create-github-releases || inputs.createGithubReleases && inputs.createGithubReleases || 'true' }}
         branch: ${{ inputs.branch }}
       env:
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
