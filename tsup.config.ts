@@ -6,4 +6,6 @@ export default defineConfig({
   target: "node20",
   sourcemap: true,
   clean: true,
+  noExternal: [/.*/],
+  external: [/^node:.*/]
 });
