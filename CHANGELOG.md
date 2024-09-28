@@ -1,5 +1,11 @@
 # typescript-changeset-release-action
 
+## 0.1.1
+
+### Patch Changes
+
+- b875e10: fix
+
 ## 0.1.0
 
 ### Minor Changes
