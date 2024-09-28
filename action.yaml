@@ -51,7 +51,7 @@ runs:
     - uses: changesets/action@3de3850952bec538fde60aac71731376e57b9b57 # v1.4.8
       id: changeset
       with:
-        publish: node ${{ github.action_path }}/dist/main.js
+        publish: node --enable-source-maps ${{ github.action_path }}/dist/main.cjs
         commit: ${{ inputs.commit-message && inputs.commit-message || inputs.commit && inputs.commit || 'Version Action' }}
         title: ${{ inputs.pr-title && inputs.pr-title || inputs.title && inputs.title || 'Release Action' }}
         setupGitUser: ${{ inputs.setup-git-user && inputs.setup-git-user || inputs.setupGitUser && inputs.setupGitUser || 'true' }}

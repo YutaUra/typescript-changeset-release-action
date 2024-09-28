@@ -1,5 +1,3 @@
-import "source-map-support/register.js";
-
 import * as core from "@actions/core";
 import { run } from "./run.js";
 
