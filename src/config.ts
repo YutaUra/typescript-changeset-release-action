@@ -30,6 +30,8 @@ const stringInputSchema = z.union([
 ]);
 
 const loadUserConfig = (): Partial<Config> => {
+  console.log("ENV");
+  console.log(process.env);
   const autoMerge = booleanInputSchema.parse(core.getInput("auto-merge"));
   const commitMessage =
     stringInputSchema.parse(core.getInput("commit-message")) ||

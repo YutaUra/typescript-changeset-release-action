@@ -52,7 +52,6 @@ runs:
       id: config
       run: node ${{ github.action_path }}/dist/config.js
       env:
-        INPUT_CHANGESET-CONFIG-FILE: ${{ inputs.changeset-config-file }}
         INPUT_AUTO-MERGE: ${{ inputs.auto-merge }}
         INPUT_COMMIT: ${{ inputs.commit }}
         INPUT_COMMIT-MESSAGE: ${{ inputs.commit-message }}
