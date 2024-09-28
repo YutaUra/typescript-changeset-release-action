@@ -2,24 +2,41 @@ name: typescript-changeset-release-action
 description: A GitHub Action to manage GitHub Action's release using changeset
 
 inputs:
+  auto-merge:
+    description: |
+      A boolean value to indicate whether to auto-merge the pull request or not. Default to `false`
+    required: false
   # for changesets/action
   commit:
     description: |
       The commit message. Default to `Version Action`
     required: false
-    default: "Version Action"
+    deprecationMessage: "Use `commit-message` instead"
+  commit-message:
+    description: |
+      The commit message. Default to `Version Action`
+    required: false
   title:
     description: The pull request title. Default to `Release Action`
     required: false
-    default: "Release Action"
+    deprecationMessage: "Use `pr-title` instead"
+  pr-title:
+    description: The pull request title. Default to `Release Action`
+    required: false
   setupGitUser:
     description: Sets up the git user for commits as `"github-actions[bot]"`. Default to `true`
     required: false
-    default: "true"
+    deprecationMessage: "Use `setup-git-user` instead"
+  setup-git-user:
+    description: Sets up the git user for commits as `"github-actions[bot]"`. Default to `true`
+    required: false
   createGithubReleases:
     description: "A boolean value to indicate whether to create Github releases after `publish` or not"
     required: false
-    default: "true"
+    deprecationMessage: "Use `create-github-releases` instead"
+  create-github-releases:
+    description: "A boolean value to indicate whether to create Github releases after `publish` or not"
+    required: false
   branch:
     description: Sets the branch in which the action will run. Default to `github.ref_name` if not provided
     required: false
@@ -31,11 +48,35 @@ runs:
       with:
         node-version: 20
 
+    - shell: sh
+      id: config
+      run: node ${{ github.action_path }}/dist/config.js
+      env:
+        INPUT_CHANGESET-CONFIG-FILE: ${{ inputs.changeset-config-file }}
+        INPUT_AUTO-MERGE: ${{ inputs.auto-merge }}
+        INPUT_COMMIT: ${{ inputs.commit }}
+        INPUT_COMMIT-MESSAGE: ${{ inputs.commit-message }}
+        INPUT_TITLE: ${{ inputs.title }}
+        INPUT_PR-TITLE: ${{ inputs.pr-title }}
+        INPUT_SETUPGITUSER: ${{ inputs.setupGitUser }}
+        INPUT_SETUP-GIT-USER: ${{ inputs.setup-git-user }}
+        INPUT_CREATEGITHUBRELEASES: ${{ inputs.createGithubReleases }}
+        INPUT_CREATE-GITHUB-RELEASES: ${{ inputs.create-github-releases }}
+
     - uses: changesets/action@3de3850952bec538fde60aac71731376e57b9b57 # v1.4.8
+      id: changeset
       with:
-        publish: node ${{ github.action_path }}/dist/index.js
-        commit: ${{ inputs.commit && inputs.commit || 'Version Action' }}
-        title: ${{ inputs.title && inputs.title || 'Release Action' }}
-        setupGitUser: ${{ inputs.setupGitUser }}
-        createGithubReleases: ${{ inputs.createGithubReleases }}
+        publish: node ${{ github.action_path }}/dist/main.js
+        commit: ${{ steps.config.outputs.commitMessage }}
+        title: ${{ steps.config.outputs.prTitle }}
+        setupGitUser: ${{ steps.config.outputs.setupGitUser }}
+        createGithubReleases: ${{ steps.config.outputs.createGithubReleases }}
         branch: ${{ inputs.branch }}
+      env:
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+
+    - if: ${{ steps.changeset.outputs.pullRequestNumber != '' && steps.config.outputs.autoMerge == 'true' }}
+      shell: sh
+      run: gh pr merge --merge --auto "${{ steps.changeset.outputs.pullRequestNumber}}"
+      env:
+        GH_TOKEN: ${{ env.GITHUB_TOKEN }}

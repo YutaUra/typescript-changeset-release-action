@@ -27,6 +27,7 @@ jobs:
       - uses: YutaUra/typescript-changeset-release-action
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
+          # if auto-merge is true, you need to set GITHUB_TOKEN
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
@@ -34,8 +35,9 @@ jobs:
 
 | Name                   | Default           | Description                                                                          |
 | ---------------------- | ----------------- | ------------------------------------------------------------------------------------ |
-| `commit`               | `Version Action`  | The commit message                                                                   |
-| `title`                | `Release Action`  | The title of PR                                                                      |
+| `auto-merge`           | `false`           | enable auto merge for version bump PR                                                |
+| `commit-message`       | `Version Action`  | The commit message                                                                   |
+| `pr-title`             | `Release Action`  | The title of PR                                                                      |
 | `setupGitUser`         | `true`            | Set up git user(`github-actions[bot]<github-actions[bot]@users.noreply.github.com>`) |
 | `createGithubReleases` | `true`            | Create a release on GitHub                                                           |
 | `branch`               | `github.ref_name` | The branch name to create a release                                                  |
