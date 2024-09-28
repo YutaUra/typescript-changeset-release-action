@@ -64,6 +64,7 @@ const main = async () => {
 
   for (const [key, value] of Object.entries(config)) {
     core.setOutput(key, value);
+    core.info(`${key}: ${value}`);
   }
 };
 
