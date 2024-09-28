@@ -48,33 +48,19 @@ runs:
       with:
         node-version: 20
 
-    - shell: sh
-      id: config
-      run: node ${{ github.action_path }}/dist/config.js
-      env:
-        INPUT_AUTO-MERGE: ${{ inputs.auto-merge }}
-        INPUT_COMMIT: ${{ inputs.commit }}
-        INPUT_COMMIT-MESSAGE: ${{ inputs.commit-message }}
-        INPUT_TITLE: ${{ inputs.title }}
-        INPUT_PR-TITLE: ${{ inputs.pr-title }}
-        INPUT_SETUPGITUSER: ${{ inputs.setupGitUser }}
-        INPUT_SETUP-GIT-USER: ${{ inputs.setup-git-user }}
-        INPUT_CREATEGITHUBRELEASES: ${{ inputs.createGithubReleases }}
-        INPUT_CREATE-GITHUB-RELEASES: ${{ inputs.create-github-releases }}
-
     - uses: changesets/action@3de3850952bec538fde60aac71731376e57b9b57 # v1.4.8
       id: changeset
       with:
         publish: node ${{ github.action_path }}/dist/main.js
-        commit: ${{ steps.config.outputs.commitMessage }}
-        title: ${{ steps.config.outputs.prTitle }}
-        setupGitUser: ${{ steps.config.outputs.setupGitUser }}
-        createGithubReleases: ${{ steps.config.outputs.createGithubReleases }}
+        commit: ${{ inputs.commit-message && inputs.commit-message || inputs.commit && inputs.commit || 'Version Action' }}
+        title: ${{ inputs.pr-title && inputs.pr-title || inputs.title && inputs.title || 'Release Action' }}
+        setupGitUser: ${{ inputs.setup-git-user && inputs.setup-git-user || inputs.setupGitUser && inputs.setupGitUser || 'true' }}
+        createGithubReleases: ${{ inputs.create-github-releases && inputs.create-github-releases || inputs.createGithubReleases && inputs.createGithubReleases || 'false' }}
         branch: ${{ inputs.branch }}
       env:
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
 
-    - if: ${{ steps.changeset.outputs.pullRequestNumber != '' && steps.config.outputs.autoMerge == 'true' }}
+    - if: ${{ steps.changeset.outputs.pullRequestNumber != '' && inputs.auto-merge == 'true' }}
       shell: sh
       run: gh pr merge --merge --auto "${{ steps.changeset.outputs.pullRequestNumber}}"
       env:
