@@ -1,5 +1,11 @@
 # typescript-changeset-release-action
 
+## 0.1.2
+
+### Patch Changes
+
+- dd531f7: fix
+
 ## 0.1.1
 
 ### Patch Changes
