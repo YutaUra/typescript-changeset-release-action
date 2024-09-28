@@ -1,5 +1,15 @@
 # typescript-changeset-release-action
 
+## 0.1.0
+
+### Minor Changes
+
+- c0ceaa5: auto merge
+
+### Patch Changes
+
+- 3ecf6c5: Update all non-major dependencies
+
 ## 0.0.3
 
 ### Patch Changes
