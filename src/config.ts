@@ -44,13 +44,24 @@ const loadUserConfig = (): Partial<Config> => {
     booleanInputSchema.parse(core.getInput("create-github-releases")) ??
     booleanInputSchema.parse(core.getInput("createGithubReleases"));
 
-  return {
+  const userConfig = {
     autoMerge,
     commitMessage,
     prTitle,
     setupGitUser,
     createGithubReleases,
   };
+
+  const config: Partial<Config> = {};
+
+  for (const [key, value] of Object.entries(userConfig)) {
+    if (value !== undefined) {
+      // @ts-ignore
+      config[key] = value;
+    }
+  }
+
+  return config;
 };
 
 const main = async () => {
