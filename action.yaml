@@ -33,7 +33,7 @@ runs:
 
     - uses: changesets/action@3de3850952bec538fde60aac71731376e57b9b57 # v1.4.8
       with:
-        publish: node ${{ github.action_path }}/dist/index.js
+        publish: node ${{ github.action_path }}/dist/main.js
         commit: ${{ inputs.commit && inputs.commit || 'Version Action' }}
         title: ${{ inputs.title && inputs.title || 'Release Action' }}
         setupGitUser: ${{ inputs.setupGitUser }}

@@ -1,13 +1,8 @@
 import "source-map-support/register.js";
 
 import * as core from "@actions/core";
-import { run } from "./run.js";
 
-const main = async (): Promise<void> => {
-  await run({
-    setupGitUser: core.getBooleanInput("setupGitUser"),
-  });
-};
+const main = async () => {};
 
 main().catch((e: Error) => {
   core.setFailed(e);
