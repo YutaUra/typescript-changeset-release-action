@@ -7,5 +7,5 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   noExternal: [/.*/],
-  external: [/^node:.*/]
+  external: [/^node:.*/],
 });
