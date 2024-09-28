@@ -62,6 +62,6 @@ runs:
 
     - if: ${{ steps.changeset.outputs.pullRequestNumber != '' && inputs.auto-merge == 'true' }}
       shell: sh
-      run: gh pr merge --auto "${{ steps.changeset.outputs.pullRequestNumber}}"
+      run: gh pr merge --merge --auto "${{ steps.changeset.outputs.pullRequestNumber}}"
       env:
         GH_TOKEN: ${{ env.GITHUB_TOKEN }}
