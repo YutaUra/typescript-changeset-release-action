@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.head_commit.author.username == 'renovate[bot]'
     steps:
-      - uses: actions/create-github-app-token@c1a285145b9d317df6ced56c09f525b5c2b6f755 # v1.11.1
+      - uses: actions/create-github-app-token@af35edadc00be37caa72ed9f3e6d5f7801bfdf09 # v1.11.7
         id: app-token
         with:
           app-id: ${{ secrets.BOT_APP_ID }}
@@ -21,7 +21,7 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
           bot-app-slug: ${{ steps.app-token.outputs.app-slug }}
 
-      - uses: YutaUra/renovate-changeset-action@c566c76dd2d1374302339f443dd9f982ce5da2c2 # v0.0.22
+      - uses: YutaUra/renovate-changeset-action@58703b808e5c6efbdb07598666f57c394fc8234a # v0.0.26
         with:
           message: ${{ github.event.head_commit.message }}
           setup-git-user: "false"
