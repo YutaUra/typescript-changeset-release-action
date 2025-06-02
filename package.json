@@ -15,8 +15,8 @@
     "@biomejs/biome": "1.9.4",
     "@changesets/cli": "2.29.4",
     "@tsconfig/strictest": "2.0.5",
-    "@types/node": "20.17.47",
-    "tsup": "8.4.0",
+    "@types/node": "20.17.54",
+    "tsup": "8.5.0",
     "typescript": "5.8.3",
     "vitest": "2.1.9"
   },
