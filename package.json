@@ -14,8 +14,8 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@changesets/cli": "2.29.7",
-    "@tsconfig/strictest": "2.0.6",
-    "@types/node": "20.19.23",
+    "@tsconfig/strictest": "2.0.7",
+    "@types/node": "20.19.24",
     "tsup": "8.5.0",
     "typescript": "5.9.3",
     "vitest": "2.1.9"
@@ -23,5 +23,5 @@
   "engines": {
     "node": "20.19.5"
   },
-  "packageManager": "pnpm@10.19.0"
+  "packageManager": "pnpm@10.20.0"
 }
