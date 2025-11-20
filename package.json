@@ -18,7 +18,7 @@
     "@types/node": "20.19.24",
     "tsup": "8.5.0",
     "typescript": "5.9.3",
-    "vitest": "2.1.9"
+    "vitest": "4.0.10"
   },
   "engines": {
     "node": "20.19.5"
