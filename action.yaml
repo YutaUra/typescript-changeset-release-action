@@ -46,7 +46,7 @@ runs:
   steps:
     - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
       with:
-        node-version: 20.20.2
+        node-version: 24.15.0
 
     - uses: changesets/action@63a615b9cd06ba9a3e6d13796c7fbcb080a60a0b # v1.8.0
       id: changeset
