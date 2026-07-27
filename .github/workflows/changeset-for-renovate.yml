@@ -13,7 +13,7 @@ jobs:
         with:
           app-id: ${{ secrets.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           token: ${{ steps.app-token.outputs.token }}
       - uses: ./.github/actions/setup
@@ -21,7 +21,7 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
           bot-app-slug: ${{ steps.app-token.outputs.app-slug }}
 
-      - uses: YutaUra/renovate-changeset-action@3af2b1795c608f20b57ac4c7d727d0c01a9271b3 # v0.0.81
+      - uses: YutaUra/renovate-changeset-action@2af06ac149de7a8e87fdcff297fbad8a502769f5 # v0.0.84
         with:
           message: ${{ github.event.head_commit.message }}
           setup-git-user: "false"
